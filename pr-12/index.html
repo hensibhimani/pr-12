@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: rgb(247, 251, 255);">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<div style="padding:10px;background-color: rgb(33, 69, 201);color: aliceblue;">
+    <div  style="float: left;width: 50%;">
+      <h1 style="float: left;" align="center">bakery</h1>
+    </div>
+      
+     <div  style="float: right;margin-top: 12px;padding-left: 10px;">
+        <button onclick="logout()" class="btn btn-light">logout</button>
+       </div>
+       <div  style="float: right;margin-top: 12px;">
+        <button onclick="cart()" class="btn btn-light">Cart</button>
+       </div> 
+    <div style="clear: both;"></div>
+  </div>
+  
+<div class="container">
+    <div class="row pt-5 pb-5">
+        <div class="col-md-1">
+            <button onclick="viewAllRecord()" class="btn btn-primary">All</button>
+        </div>
+        <div class="col-md-1">
+            <button onclick="icecreamdata()" class="btn btn-primary">icecream</button>
+        </div>
+        <div class="col-md-1">
+            <button onclick="cakedata()" class="btn btn-primary">cake</button>
+        </div>
+        <div class="col-md-1">
+            <button onclick="shakedata()" class="btn btn-primary">shakes</button>
+        </div>
+    </div>
+
+    <div class="row" id="allrecord">
+
+    </div>
+
+</div>
+<script>
+    let data = [
+        {
+            pid: 1,
+            name: "chocolate ice-cream",
+            price: 100,
+            qty : 1,
+            image: "https://images.pexels.com/photos/2846337/pexels-photo-2846337.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            category: "icecream"
+        },
+        {
+            pid: 2,
+            name: "strawberry shake",
+            price: 200,
+            qty : 1,
+            image: "https://images.pexels.com/photos/8805097/pexels-photo-8805097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            category: "shakes"
+        },
+        {
+            pid: 3,
+            name: "chocolate cake",
+            price: 500,
+            qty : 1,
+            image: "https://images.pexels.com/photos/2680603/pexels-photo-2680603.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            category: "cake"
+        },
+        {
+            pid: 4,
+            name: "mango shake",
+            price: 200,
+            qty : 1,
+            image: "https://images.pexels.com/photos/6544212/pexels-photo-6544212.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+            category: "shakes"
+        },
+        {
+            pid: 5,
+            name: "strawberry cake",
+            price: 500,
+            qty : 1,
+            image: "https://images.pexels.com/photos/10311446/pexels-photo-10311446.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            category: "cake"
+        },
+        {
+            pid: 6,
+            name: "keser pista ice-cream ",
+            price: 100,
+            qty : 1,
+            image: "https://images.pexels.com/photos/2156698/pexels-photo-2156698.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+
+            category: "icecream"
+        },
+        {
+            pid: 7,
+            name: "mango ice-cream",
+            price: 100,
+            qty : 1,
+            image: "https://images.pexels.com/photos/5060377/pexels-photo-5060377.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            category: "icecream"
+        },
+        {
+            pid: 8,
+            name: "rainbow cake",
+            price: 700,
+            qty : 1,
+            image: "https://images.pexels.com/photos/11753321/pexels-photo-11753321.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            category: "cake"
+        },
+        {
+            pid: 9,
+            name: "blueberry shake",
+            price: 300,
+            qty : 1,
+            image: "https://images.pexels.com/photos/8805137/pexels-photo-8805137.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            category: "shakes"
+        },
+        {
+            pid: 10,
+            name: "cheese cake",
+            price: 600,
+            qty : 1,
+            image: "https://images.pexels.com/photos/162688/cheesecake-table-dessert-cream-162688.jpeg",
+            category: "cake"
+        },
+        {
+            pid: 11,
+            name: "chocolate shake",
+            price: 250,
+            qty : 1,
+            image: "https://images.pexels.com/photos/14761085/pexels-photo-14761085.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            category: "shakes"
+        },
+        {
+            pid: 12,
+            name: "blueberry cake",
+            price: 550,
+            qty : 1,
+            image: "https://www.glowellmag.com/wp-content/uploads/2020/07/healthy-blueberry-recipes.jpeg",
+            category: "cake"
+        },
+        {
+            pid: 13,
+            name: "venila ice-cream",
+            price: 100,
+            qty : 1,
+            image: "https://images.pexels.com/photos/1332267/pexels-photo-1332267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            category: "icecream"
+        },
+        {
+            pid: 14,
+            name: "banana shake",
+            price: 150,
+            qty : 1,
+            image: "https://images.pexels.com/photos/8805136/pexels-photo-8805136.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            category: "shakes"
+        },
+        {
+            pid: 15,
+            name: "venila cake",
+            price: 400,
+            qty : 1,
+            image: "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2019/9/3/0/FNK_the-best-vanilla-cake_H_s4x3.jpg.rend.hgtvcom.1280.960.suffix/1567523608593.jpeg",
+            category: "cake"
+        },
+        {
+            pid: 16,
+            name: "blueberry ice-cream",
+            price: 150,
+            qty : 1,
+            image: "https://images.pexels.com/photos/5090114/pexels-photo-5090114.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            category: "icecream"
+        },
+        {
+            pid: 17,
+            name: "raspberry shake",
+            price: 120,
+            qty : 1,
+            image: "https://theprettybee.com/wp-content/uploads/2017/01/dairy-free-raspberry-milkshake-recipe.jpg",
+            category: "shakes"
+        },
+        {
+            pid: 18,
+            name: "strawberry ice-cream",
+            price: 120,
+            qty : 1,
+            image: "https://i.pinimg.com/originals/ec/3c/a5/ec3ca5561a8bf50dd27429fe42062817.jpg",
+            category: "icecream"
+        },
+        {
+            pid: 19,
+            name: "orange cake",
+            price: 500,
+            qty : 1,
+            image: "https://mobimg.b-cdn.net/v3/fetch/95/954c59262f999416037ccb7512d672c1.jpeg",
+            category: "cake"
+        },
+        {
+            pid: 20,
+            name: "better scotch ice-cream",
+            price: 100,
+            qty : 1,
+            image: "https://pastrychefonline.com/wp-content/uploads/2019/07/square-image-bowl-of-ice-cream-1.jpg",
+            category: "icecream"
+        },
+        {
+            pid: 21,
+            name: "red velvet cake",
+            price: 700,
+            qty : 1,
+            image: "https://nambafood.kg/image_by_id/49388",
+            category: "cake"
+        },
+        {
+            pid: 22,
+            name: "oreo shake",
+            price: 150,
+            qty : 1,
+            image: "https://foodjunction.ie/wp-content/uploads/2021/02/EGADFHomemadeoreomilkshake6.jpg",
+            category: "shakes"
+        },
+        {
+            pid: 23,
+            name: "raspberry ice-cream",
+            price: 180,
+            qty : 1,
+            image: "https://mobimg.b-cdn.net/v3/fetch/26/262ef2d6b3a62b7b8990218bbbcfc3a2.jpeg",
+            category: "icecream"
+        },
+        {
+            pid: 24,
+            name: "blueberry shake",
+            price: 180,
+            qty : 1,
+            image: "https://images.squarespace-cdn.com/content/v1/5f7b9b1a8be07a70f92c0f4e/1643252810410-4X8BDY2P1KRUZZ63VIJ9/bigstock-Blueberry-Smoothies-Purple-Col-317296957+%281%29.jpg",
+            category: "shakes"
+        },
+        {
+            pid: 25,
+            name: "oreo ice-cream",
+            price: 200,
+            qty : 1,
+            image: "https://bestinsingapore.com/wp-content/uploads/2020/10/vegan-oreo-ice-cream-flurries-1001205-hero-01-5c92fdbb46e0fb0001376e8f-scaled.jpg",
+            category: "icecream"
+        },
+        {
+            pid: 26,
+            name: "almond cake",
+            price: 600,
+            qty : 1,
+            image: "https://www.cheersonic-food.com/wp-content/uploads/2017/08/1-6.jpg",
+            category: "cake"
+        },
+        {
+            pid: 27,
+            name: "venila shake",
+            price: 100,
+            qty : 1,
+            image: "https://i.pinimg.com/originals/c6/fd/97/c6fd97bae5a8a031ccff6c6efcd312c5.jpg",
+            category: "shakes"
+        },
+        {
+            pid: 28,
+            name: "raspberry cake",
+            price: 440,
+            qty : 1,
+            image: "https://images.eatsmarter.com/sites/default/files/styles/1600x1200/public/raspberry-mousse-cake-486109.jpg",
+            category: "cake"
+        },
+]
+
+    viewAllRecord();
+    function viewAllRecord() {
+        localStorage.setItem('product',JSON.stringify(data));
+        let tbl = "";
+        data.map((val) => {
+            tbl += `
+                <div class="col-md-3 pb-3">
+                    <div class="card">
+                        <img src="${val.image}" style="height:300px;object-fit:cover" class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title">${val.name}</h5>
+                        <p class="card-text">Price :-${val.price}rs</p>
+                        <p class="card-text">${val.category}</p>
+                        <button type="button" id="btn(${val.pid})" onclick="order(${val.pid})"  class="btn btn-primary">Order</button>
+                        </div>
+                    </div>
+                </div>
+            `
+        })
+
+        document.getElementById('allrecord').innerHTML = tbl;
+    }
+
+    function icecreamdata() {
+        let category = "icecream";
+        let tbl = "";
+        data.map((val) => {
+
+            if (val.category == category) {
+                tbl += `
+                    <div class="col-md-3 pb-3">
+                        <div class="card">
+                            <img src="${val.image}" style="height:300px;object-fit:cover" class="card-img-top" alt="...">
+                            <div class="card-body">
+                            <h5 class="card-title">${val.name}</h5>
+                            <p class="card-text">${val.price}</p>   
+                            <p class="card-text">${val.category}</p>
+                            <button type="button" id="btn(${val.pid})" onclick="order(${val.pid})"  class="btn btn-primary">Order</button>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+
+        })
+        document.getElementById('allrecord').innerHTML = tbl;
+    }
+
+    function cakedata() {
+        let category = "cake";
+        let tbl = "";
+        data.map((val) => {
+
+            if (val.category == category) {
+                tbl += `
+                    <div class="col-md-3 pb-3">
+                        <div class="card">
+                            <img src="${val.image}" style="height:300px;object-fit:cover" class="card-img-top" alt="...">
+                            <div class="card-body">
+                            <h5 class="card-title">${val.name}</h5>
+                            <p class="card-text">${val.price}</p>
+                            <p class="card-text">${val.category}</p>
+                            <button type="button" id="btn(${val.pid})" onclick="order(${val.pid})"  class="btn btn-primary">Order</button>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+
+        })
+        document.getElementById('allrecord').innerHTML = tbl;
+    }
+
+    function shakedata() {
+        let category = "shakes";
+        let tbl = "";
+        data.map((val) => {
+
+            if (val.category == category) {
+                tbl += `
+                    <div class="col-md-3 pb-3">
+                        <div class="card">
+                            <img src="${val.image}" style="height:300px;object-fit:cover" class="card-img-top" alt="...">
+                            <div class="card-body">
+                            <h5 class="card-title">${val.name}</h5>
+                            <p class="card-text">${val.price}</p>
+                            <p class="card-text">${val.category}</p>
+                            <button type="button" id="btn(${val.pid})" onclick="order(${val.pid})"  class="btn btn-primary">Order</button>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+
+        })
+        document.getElementById('allrecord').innerHTML = tbl;
+    }
+
+    const order = (id) => {
+        
+        let cart = [];
+
+        let allproduct = JSON.parse(localStorage.getItem('product'));
+
+       allproduct.map((val)=>{
+           if(val.pid == id)
+           {
+              let obj = {
+                  pid : val.pid,
+                  name : val.name,
+                  qty : val.qty,
+                  price : val.price,
+                  category : val.category,
+                  image : val.image
+              }
+
+              if(localStorage.getItem('cart') === null  || localStorage.getItem('cart') ===undefined)
+              {
+                cart.push(obj)
+                localStorage.setItem('cart',JSON.stringify(cart));
+              }
+              else{
+                  let val = JSON.parse(localStorage.getItem('cart'));
+                  val.push(obj);
+                  localStorage.setItem('cart',JSON.stringify(val));
+              } 
+           }
+       })
+       alert("order successfully")
+       if(id){
+        let btn = document.getElementById(`btn(${id})`).style.display='none'     }
+
+
+    }
+
+    const cart = () => {
+        window.location.href = "u1.html";
+    }
+        
+    const logout = () => {
+            localStorage.removeItem('checkUserLogin');
+            window.location.href = "login.html";
+    }
+
+    let chekUser = JSON.parse(localStorage.getItem('checkUserLogin'));
+
+    if(!chekUser){
+    window.location.href = "login.html";
+    }
+</script>
+</body>
+</html>
